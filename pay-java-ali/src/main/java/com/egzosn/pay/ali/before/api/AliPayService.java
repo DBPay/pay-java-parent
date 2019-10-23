@@ -153,7 +153,7 @@ public class AliPayService extends BasePayService<AliPayConfigStorage> {
     @Override
     public Map<String, Object> orderInfo(PayOrder order) {
 
-        Map<String, Object> orderInfo = getOrder(order);
+        Map<String, Object> orderInfo =  getOrder(order);
 
         String sign = null;
         if (AliTransactionType.APP == order.getTransactionType() ){
@@ -233,7 +233,7 @@ public class AliPayService extends BasePayService<AliPayConfigStorage> {
         // 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
         orderInfo.put("return_url", payConfigStorage.getReturnUrl());
 
-        return orderInfo;
+        return preOrderHandler(orderInfo, order);
     }
 
 
@@ -307,7 +307,7 @@ public class AliPayService extends BasePayService<AliPayConfigStorage> {
      * @return 返回图片信息，支付时需要的
      */
     @Override
-    public BufferedImage genQrPay(PayOrder orderInfo) {
+    public String getQrPay(PayOrder orderInfo) {
         throw new UnsupportedOperationException();
     }
 
@@ -505,6 +505,17 @@ public class AliPayService extends BasePayService<AliPayConfigStorage> {
      */
     @Override
     public Map<String, Object> transfer(TransferOrder order) {
+        return null;
+    }
+
+    /**
+     * 获取支付请求地址
+     *
+     * @param transactionType 交易类型
+     * @return 请求地址
+     */
+    @Override
+    public String getReqUrl(TransactionType transactionType) {
         return null;
     }
 
